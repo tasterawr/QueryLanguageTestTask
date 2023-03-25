@@ -30,7 +30,7 @@ public class QueryLexemeAnalyser {
             loadStateMap();
             prepareData();
         }
-        catch (IOException e){
+        catch (Exception e){
             throw new QueryExecutorInstantiationException("Не удалось инициализировать обработчик запросов.", e);
         }
     }

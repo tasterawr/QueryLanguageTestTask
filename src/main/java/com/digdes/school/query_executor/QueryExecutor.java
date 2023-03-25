@@ -38,7 +38,7 @@ public class QueryExecutor {
         result.clear();
     }
 
-    public List<Map<String, Object>> executeRequest(String request){
+    public List<Map<String, Object>> executeRequest(String request) throws TypeMismatchException, UnsupportedColumnException, NullValueException {
         resetData();
         String error = syntaxAnalyser.analyseSyntax(request);
         if (!error.equals("")){
@@ -52,15 +52,10 @@ public class QueryExecutor {
         return result;
     }
 
-    private void processEntryList(){
+    private void processEntryList() throws TypeMismatchException, UnsupportedColumnException, NullValueException {
         while (pos < postfixPos){
             if (entryList.get(pos).getType() == EntryType.CMD) {
-                try {
-                    checkEntry();
-                } catch (TypeMismatchException | UnsupportedColumnException | NullValueException e){
-                    displayError(e.getMessage());
-                    break;
-                }
+                checkEntry();
             } else pushElm(entryList.get(pos++));
         }
     }
@@ -364,7 +359,7 @@ public class QueryExecutor {
         stack.push(entry);
     }
 
-    private void displayError(String error){
+    private static void displayError(String error){
         System.out.println("ОШИБКА: " + error);
     }
 }

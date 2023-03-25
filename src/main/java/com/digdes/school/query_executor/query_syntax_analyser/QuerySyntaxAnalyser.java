@@ -19,10 +19,6 @@ public class QuerySyntaxAnalyser {
 
     public String analyseSyntax(String request){
         lexemes = lexemeAnalyser.analyseLexemes(request);
-        
-        lexemes = lexemes.stream()
-                .sorted(Comparator.comparing(Lexeme::getPosition))
-                .collect(Collectors.toList());
         index = 0;
         error = "";
         entryList = new ArrayList<>();

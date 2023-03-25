@@ -1,0 +1,10 @@
+select
+delete
+update
+insert
+values
+where
+like
+ilike
+and
+or

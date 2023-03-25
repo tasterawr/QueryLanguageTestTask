@@ -1,0 +1,10 @@
+UPDATE VALUES 'age   $'= 10, 'last  name'=  'aewew'    where 'id'=5
+INSERT VALUES 'id'=1, 'lastname'='Abobin'
+INSERT VALUES 'id'=1, 'lastname'='zewzw'
+DELETE WHERE 'id'=1
+
+INSERT VALUES 'id'=1, 'lastName'='Петров', 'age'=30, 'cost'=5.4, 'active'=true
+INSERT VALUES 'id'=2, 'lastName'='Иванов', 'age'=25, 'cost'=3.4, 'active'=false
+INSERT VALUES 'id'=3, 'lastName'='Николаева', 'age'=26, 'cost'=4.5, 'active'=true
+
+UPDATE VALUES 'cost'=3.0 WHERE 'lastname' like '%ов' and 'age' < 30

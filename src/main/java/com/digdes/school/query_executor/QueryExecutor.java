@@ -213,7 +213,7 @@ public class QueryExecutor {
                 return false;
             }
             if (value instanceof Long)
-                return (Long) x.get(colName) > (Long) value;
+                return (Long) x.get(colName) < (Long) value;
             else if (value instanceof Double)
                 return (Double) x.get(colName) < (Double) value;
             return false;

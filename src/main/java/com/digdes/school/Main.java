@@ -1,10 +1,8 @@
 package com.digdes.school;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -16,11 +14,11 @@ public class Main {
         execute(starter, "INSERT VALUES 'id'=3, 'lastName'='Николаева', 'age'=26, 'cost'=4.5, 'active'=true");
 
         execute(starter, "select");
-        execute(starter, "UPDATE values 'cost'=5.5 where 'age'> 25 and 'lastname' like '%%ол%%'");
+        execute(starter, "UPDATE values 'cost'=5.5 where 'age'> 25 and 'lastname' like '%ол%'");
         execute(starter, "update values 'age'=null where 'active'=false");
         execute(starter, "select where 'ID'>=2 and 'age'!=26");
 
-        execute(starter, "delete where 'lastname' ilike '%%ОВ'");
+        execute(starter, "delete where 'lastname' ilike '%ОВ'");
         execute(starter, "select");
     }
 
@@ -38,7 +36,7 @@ public class Main {
     }
 
     private static void execute(JavaSchoolStarter starter, String request) {
-        System.out.printf("Запрос: " + request);
+        System.out.print("Запрос: " + request);
         try{
             List<Map<String, Object>> result = starter.execute(request);
             printResult(result);

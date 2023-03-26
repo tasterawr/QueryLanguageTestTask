@@ -166,12 +166,15 @@ public class QuerySyntaxAnalyser {
         if (index >= lexemes.size())
             return true;
 
-        while (lexemes.get(index) != null && lexemes.get(index).getLexemeType() == LexemeType.OR){
-            index++;
-            if (!isLogExpression()) return false;
-            writeCommand(Command.OR);
+        if (lexemes.get(index).getLexemeType() == LexemeType.OR){
+            while (index < lexemes.size() && lexemes.get(index).getLexemeType() == LexemeType.OR){
+                index++;
+                if (!isLogExpression()) return false;
+                writeCommand(Command.OR);
+            }
+        } else {
+            index--;
         }
-
         return true;
     }
 
@@ -181,13 +184,15 @@ public class QuerySyntaxAnalyser {
         index++;
         if (index >= lexemes.size())
             return true;
-
-        while (index < lexemes.size() && lexemes.get(index).getLexemeType() == LexemeType.AND){
-            index++;
-            if (!isRelExpression()) return false;
-            writeCommand(Command.AND);
+        if (lexemes.get(index).getLexemeType() == LexemeType.AND){
+            while (index < lexemes.size() && lexemes.get(index).getLexemeType() == LexemeType.AND){
+                index++;
+                if (!isRelExpression()) return false;
+                writeCommand(Command.AND);
+            }
+        } else {
+            index--;
         }
-
         return true;
     }
 

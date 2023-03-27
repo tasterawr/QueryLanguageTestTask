@@ -1,5 +1,6 @@
 package com.digdes.school.query_executor.query_syntax_analyser;
 
+import com.digdes.school.query_executor.exception.SyntaxErrorException;
 import com.digdes.school.query_executor.query_lexeme_analyser.Lexeme;
 import com.digdes.school.query_executor.query_lexeme_analyser.LexemeClass;
 import com.digdes.school.query_executor.query_lexeme_analyser.LexemeType;
@@ -17,7 +18,7 @@ public class QuerySyntaxAnalyser {
     private String error;
     private List<Entry> entryList;
 
-    public String analyseSyntax(String request){
+    public String analyseSyntax(String request) throws SyntaxErrorException {
         lexemes = lexemeAnalyser.analyseLexemes(request);
         index = 0;
         error = "";
@@ -27,17 +28,25 @@ public class QuerySyntaxAnalyser {
         return error;
     }
 
-    private boolean analyse(){
+    private void analyse() throws SyntaxErrorException {
+        if (lexemes.isEmpty()){
+            writeError("Передана пустая строка.");
+        }
         while (index < lexemes.size()){
             if ((!isSelectRequest()
                     && !isInsertRequest()
                     && !isUpdateRequest()
                     && !isDeleteRequest()) || !error.equals("")){
-                return false;
+                if (error.equals("")){
+                    writeError("Строка не является запросом.");
+                }
+                break;
             }
         }
 
-        return true;
+        if (!error.equals("")){
+            throw new SyntaxErrorException(error);
+        }
     }
 
     private boolean isSelectRequest(){

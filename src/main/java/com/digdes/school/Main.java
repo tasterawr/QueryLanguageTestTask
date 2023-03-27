@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-//        startUI();
+        startUI();
 
         JavaSchoolStarter starter = new JavaSchoolStarter();
         execute(starter, "INSERT VALUES 'id'=1, 'lastName'='Петров', 'age'=30, 'cost'=5.4, 'active'=true");
@@ -56,6 +56,6 @@ public class Main {
     }
 
     private static void displayError(String error){
-        System.out.println("ОШИБКА: " + error);
+        System.out.println("ОШИБКА: " + error + "\n");
     }
 }

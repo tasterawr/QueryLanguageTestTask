@@ -1,6 +1,7 @@
 package com.digdes.school.query_executor;
 
 import com.digdes.school.query_executor.exception.NullValueException;
+import com.digdes.school.query_executor.exception.SyntaxErrorException;
 import com.digdes.school.query_executor.exception.TypeMismatchException;
 import com.digdes.school.query_executor.exception.UnsupportedColumnException;
 import com.digdes.school.query_executor.query_lexeme_analyser.LexemeType;
@@ -38,13 +39,13 @@ public class QueryExecutor {
         result.clear();
     }
 
-    public List<Map<String, Object>> executeRequest(String request) throws TypeMismatchException, UnsupportedColumnException, NullValueException {
+    public List<Map<String, Object>> executeRequest(String request) throws Exception {
         resetData();
         String error = syntaxAnalyser.analyseSyntax(request);
-        if (!error.equals("")){
-            displayError(error);
-            return Collections.emptyList();
-        }
+//        if (!error.equals("")){
+//            displayError(error);
+//            return Collections.emptyList();
+//        }
 
         entryList = syntaxAnalyser.getEntryList();
         postfixPos = entryList.size();
